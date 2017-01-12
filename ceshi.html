@@ -3,8 +3,66 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+<style>
+	#book{width:200px;height:200px;background:#eee;}
+	.ceshi{width:-webkit-fit-content;margin:auto;overflow:hidden;}
+	.ceshi li{float: left;padding:5px 10px;background:rgba(255,0,0,0.3);}
+	.stamp {width: 387px;height: 140px;padding: 0 10px;position: relative;overflow: hidden;}
+	.stamp:before {content: '';position: absolute;top:0;bottom:0;left:10px;right:10px;z-index: -1;}
+	.stamp:after {content: '';position: absolute;left: 10px;top: 10px;right: 10px;bottom: 10px;box-shadow: 0 0 20px 1px rgba(0, 0, 0, 0.5);z-index: -2;}
+	.stamp i{position: absolute;left: 20%;top: 45px;height: 190px;width: 390px;background-color: rgba(255,255,255,.15);transform: rotate(-30deg);}
+	.stamp .par{float: left;padding: 0 15px;width: 220px;border-right:2px dashed rgba(255,255,255,.3);text-align: left;}
+	.stamp .par p{color:#fff;}
+	.stamp .par span{font-size: 50px;color:#fff;margin-right: 5px;}
+	.stamp .par .sign{font-size: 34px;}
+	.stamp .par sub{position: relative;top:-5px;color:rgba(255,255,255,.8);}
+	.stamp .copy{display: inline-block;padding:21px 14px;width:100px;vertical-align: text-bottom;font-size: 30px;color:rgb(255,255,255);}
+	.stamp .copy p{font-size: 16px;margin-top: 15px;}
+	.stamp01{background: #F39B00;background: radial-gradient(transparent 0, transparent 5px, #F39B00 5px);background-size: 15px 15px;background-position: 9px 3px;}
+	.stamp01:before{background-color:#F39B00;}
+	/*vertical-align 自适应*/
+		.icon { 
+    display: inline-block; 
+    width:20px; height:20px; 
+    background: url(delete.png) no-repeat center; 
+    white-space:nowrap; 
+    letter-spacing: -1em; 
+    text-indent: -99em; 
+    color: transparent;
+    /* IE7 */
+    *text-indent: 0;
+    *zoom: expression( this.runtimeStyle['zoom'] = '1', this.innerHTML = '\3000');
+	}
+	.icon:before { 
+	    content: '\3000'; 
+	}
+	/*vertical-align*/
+</style>
 </head>
 <body>
+	<div id="book">1232131</div>
+	<div id="des"></div>
+	<button id="clickme">clikeme</button>
+	<ul class="ceshi">
+		<li><a href="">asd</a></li>
+		<li><a href="">sdfsdf</a></li>
+		<li><a href="">dfgdfg</a></li>
+	</ul>
+	<div class="stamp stamp01">
+		<div class="par"><p>XXXXXX折扣店</p><sub class="sign">￥</sub><span>50.00</span><sub>优惠券</sub><p>订单满100.00元</p></div>
+		<div class="copy">副券<p>2015-08-13<br>2016-08-13</p></div>
+		<i></i>
+	</div>
+	<input type="text" id="demo">
+	<div id="message"></div>
+	<div id="daytime"></div>
+	<div id="forin"></div>
+	<button onclick="myfunction()">click me</button>
+	<a href="http://ww2.sinaimg.cn/large/4b4d632fgw1f1hhza4495j20ku0rsjxs.jpg" download>下载</a>
+	<div id="box">
+		<input type="text">
+	</div>
 	<script>
 		var day=new Date().getDay();
 		switch(day){
@@ -14,8 +72,101 @@
 			case 1:
 			  x="today it's monday";
 			  break;
+			case 2:
+			  x="today it's tursday"
 		}
-		console.log(day);
+		document.getElementById("daytime").innerHTML = x;
+		$(function(){
+			// $('#clickme').click(function() {
+			//   $('#book').animate({
+			//     width: ['toggle', 'swing'],
+			//     height: ['toggle', 'swing'],
+			//     opacity: 'toggle'
+			//   }, 5000, 'linear', function() {
+			//       $(this).after('<div>Animation complete.</div>');
+			//   });
+			// });
+		   $('#clickme').click(function(){
+		   	  $('#book').animate({
+		   	  	width:['toggle','swing'],
+		   	  	height:['toggle','swing'],
+		   	  	opacity:'toggle'
+		   	  },3000,'linear',function(){
+		   	  	 $('body').append('<div>asdkjaskldasd</div>')
+		   	  })
+		   })
+		})
+       var text = '{ "employees" : [' +
+					'{ "firstName":"John" , "lastName":"Doe" },' +
+					'{ "firstName":"Anna" , "lastName":"Smith" },' +
+					'{ "firstName":"Peter" , "lastName":"Jones" } ]}';
+	    var obj = JSON.parse(text);
+	    document.getElementById('des').innerHTML=obj.employees[1].firstName+" "+obj.employees[1].lastName;
+	    function myfunction(){
+	    	try{
+	    		var x = document.getElementById("demo").value;
+	    		if (x=="") throw "empty";
+	    		if(isNaN(x)) throw "not a number";
+	    		if(x>10) throw "too hight";
+	    		if(x<5)throw "too low";
+	    	}
+	    	catch(err){
+	    		var y = document.getElementById("message");
+	    		y.innerHTML ="errowe" + err
+	    	}
+	    }
+	    $(function(){
+	    	$('#box input').keyup(function(e){
+	    		 alert(e.which);
+	    	})
+	    }) 
+	    var x = "";
+	    for(var i=0;i<10;i++){
+	    	if(i==3){
+	    		break
+	    	}
+	    	x = x + "the number is" + i + "<br>"
+	    }
+	    document.getElementById('forin').innerHTML = x;
 	</script>
+	<svg width="440" height="440">
+    <circle cx="220" cy="220" r="170" stroke-width="50" stroke="#D1D3D7" fill="none"></circle>
+    <circle cx="220" cy="220" r="170" stroke-width="50" stroke="#00A5E0" fill="none" transform="matrix(0,-1,1,0,0,440)" stroke-dasharray="0 1069"></circle>
+</svg>
+<div id="outerBox"></div>
+<ul id="list">
+	<li>one</li>
+	<li>two</li>
+	<li>three</li>
+</ul>
+<p id="show"><span class="sp" id="sp">adasdd</span></p>
+<div id="ceshi" class="lll"><span>adasdad</span></div>
+<script>
+    $(function(){
+    	var a =[],
+    	    b =['four','five','six'];
+    	$('#list>li').each(function(){
+    		 var txt = $(this).text();
+    		 a.push(txt);
+    		 a.reverse();
+    		 a.concat(b);
+    	})
+    	$('#show').text(a.concat(b));
+    	
+    })
+	function person(firstName,lastName,age,eyeColor){
+		this.firstname = firstName;
+		this.lastname = lastName;
+		this.age = age;
+		this.eyecolor = eyeColor;
+		this.changeName = newName;
+		function newName(name){
+			this.lastname = name;
+		}
+	}
+	var myFathor = new person('john','snow',30,'blue');
+	myFathor.changeName('gree');
+	document.getElementById('outerBox').innerHTML = myFathor.firstname + " " + myFathor.lastname+ " " + myFathor.age+ " " + myFathor.eyecolor;
+</script>
 </body>
 </html>

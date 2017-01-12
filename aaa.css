@@ -1,0 +1,34 @@
+.hd-search .key-style input { opacity: 1; }
+
+.hd-search .key-style .store-name { opacity: 0; }
+
+.hd-search form { display: -webkit-flex; padding-top: 8px; }
+
+.hd-search .ipt-wrap { -webkit-flex: 1; }
+
+.hd-search form > button { margin: 0 10px; }
+
+.ceshi { color: #eee; }
+
+.aa { font-size: 20px; }
+
+.cc { color: #fff; }
+
+.kk { font-size: 16px; }
+
+a { color: red; }
+a:hover { color: black; }
+a.ceshi { font-size: 20px; }
+a.after { display: inline-block; }
+
+div { color: red; }
+
+ul { margin: 0; }
+ul li { padding-top: 2px; }
+ul li.top { padding-left: 20px; }
+
+ul.test { margin: 0; }
+ul.test li { padding-top: 2px; }
+ul.test li.top { padding-left: 20px; }
+
+/*# sourceMappingURL=aaa.css.map */

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<div id="showTime">0</div>
+	<button id="btn">点击</button>
+	<button id="close">关闭</button>
+	<input type="text" id="clock">
+	<button id="stop">暂停</button>
+	<button id="go">go</button>
+	<div id="append_div">文章标题</div>
+	<script>
+		var fruit = ["apple","banana","orange"];
+		var fruit2 = ["120","200","50","10"];
+		fruit.push("pko");
+		fruit.reverse();
+		fruit.unshift("ceshi");
+		var res = fruit2.sort(function(a,b){
+			return b-a;
+		});
+		document.getElementById('showTime').innerHTML = res;
+		var BTN = document.getElementById('btn');
+		var ceshi;
+		BTN.onclick = function(){
+			ceshi = window.open('', 'newwindow', 'top=nInt,left=nInt,width=nInt,height=nInt,location=yes,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no');
+		}
+		document.getElementById('close').onclick = function(){
+			ceshi.close();
+		}
+		var int = window.setInterval('clock()',1000);
+		function clock(){
+			var d = new Date();
+			var t = d.toLocaleTimeString();
+			document.getElementById('clock').value = t;
+		}
+		document.getElementById('stop').onclick = function(){
+			window.clearInterval(int);
+		}
+		function goback(){
+			alert(location.search);
+		}
+		document.getElementById('go').onclick = function(){
+			goback();
+		}
+		var date = +new Date();
+		var arr = ['kkjk','asd','sdff'];
+		var str = "ceshiyixia";
+		arr.splice(1,1,"haha");
+		console.log(arr);
+		var el = document.createElement('p');
+		var txt = document.createTextNode('这里是段落');
+		var pa = el.appendChild(txt);
+		document.getElementsByTagName('body')[0].appendChild(pa);
+		var person = {
+			age:17
+		}
+		Object.defineProperty(person,"type",{
+			get:function(){
+				if(person.age>17){
+					return "成人"
+				}
+				return "小孩"
+			}
+		})
+		var storage = window.localStorage; 
+		for (var i=0, len = storage.length; i < len; i++)
+		{
+		var key = storage.key(i); 
+		var value = storage.getItem(key); 
+		console.log(key + "=" + value); 
+		}
+		var txt = document.createTextNode("新的内容");
+		document.getElementById('append_div').insertBefore(txt);
+	</script>
+</body>
+</html>

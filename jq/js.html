@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+  <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+	<script src="myPlugn.js"></script>
+</head>
+<body>
+  <ul id="list">
+  	<li><a href="www.baidu.com">连接地址</a></li>
+  	<li><a href="www.163.com">连接地址</a></li>
+  	<li><a href="www.126.com">连接地址</a></li>
+  	<li><a href="www.sohu.com">连接地址</a></li>
+  	<li><a href="www.sina.com">连接地址</a></li>
+  </ul>
+
+ <script>
+    $(function(){
+        $('ul a').myplugn({
+          'color':'green',
+          'fontSize':'12px',
+          'textDecoration':'underline'
+        });
+    })
+    var arr = [];
+    console.log(Object.prototype.toString.call(arr));
+    var obj = {};
+    Object.defineProperty(obj,'x',{
+      configurable:false,
+      value:1
+    });
+    console.log(obj.x);
+
+    //navigator test
+    function hasplugin(name){
+      name = name.toLowerCase();
+      for(var i=0;i<navigator.plugins.length;i++){
+        if(navigator.plugins[i].name.toLowerCase().indexOf(name) > -1){
+          return true;
+        }
+      }
+      return false;
+    }
+    console.log(hasplugin("flash"));
+    console.log(hasplugin("QuickTime"));
+    var myList = document.getElementById('list');
+    var deeplist = myList.cloneNode(true);
+    alert(deeplist.childNodes.length);
+ </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+    <style>
+    	.mystyle{background-color: red;}
+    </style>
+</head>
+<body>
+	<ul id="list" onclick="addEl(this)" title="test" data-name="test2"><li>列表1</li><li>列表2</li></ul>
+	<ul id="list2"><li>列表3</li><li>列表4</li></ul>
+	<button onclick="myfunction()">复制</button>
+	<p id="para"></p>
+	<div id="division" class="ceshi">颜色填充</div>
+	<button id="sub_btn">提交</button>
+	<script>
+		var node = document.createElement('li');
+		var txt = document.createTextNode('列表3');
+		    node.appendChild(txt);
+		var list = document.getElementById('list');
+		// list.insertBefore()
+		// list.removeChild(list.childNodes[1]);
+		function addEl(el){
+			el.insertBefore(node,el.childNodes[0]);
+		}
+		document.getElementById('sub_btn').addEventListener('click',function(){
+			 this.innerHTML = "已提交";
+		})
+		list.attributes['title'].value = "mast";
+		document.getElementsByTagName('p')[0].innerHTML = list.attributes['title'].value;
+		document.getElementById('division').onclick = function(){
+			var h = this.clientWidth;
+			console.log(h);
+		}
+		function myfunction(){
+			var cl = document.getElementById("list").lastChild;
+			var cl2 = cl.cloneNode(true);
+			document.getElementById('list2').appendChild(cl2);
+		}
+		var hash = window.location.hash;
+		console.log(hash);
+	</script>
+</body>
+</html>

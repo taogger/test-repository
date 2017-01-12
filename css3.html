@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no">
+	<meta name="viewport" content="initial-scale=1 maximum-scale=1 minimum-scale=1 user-scalable=no">
+	<title>Document</title>
+	<style>
+	    html{font-size:20px;}
+	    body{padding:0;margin:0;color:#666;}
+	    .icon{width:20px;height:20px;overflow:hidden;}
+	    .icon>.icon{position:relative;left:-20px;border-right:20px solid transparent;-webkit-filter:drop-shadow(rgb(255,0,0) 20px 0);}
+	    .icon-del{background:url(http://www.zhangxinxu.com/study/201606/delete.png) no-repeat;}
+	    .line:after{content:'';border-bottom:1px solid #fff;width:200%;-webkit-transform:scale(0.5);transform:scale(0.5);-webkit-transform-origin:0 0;transform-origin:0 0;-webkit-sizing:border-box;position:absolute;top:0;left:0;}
+	    .line2{position:relative;color:#fff;padding:10px;margin-bottom:10px;}
+	    .line2:after{content:'';width:200%;height:1px;-webkit-transform:scale(0.5);transform:scale(0.5);-webkit-transform-origin:0 0;transform-origin:0 0;position:absolute;background:#fff;bottom:0;left:0;}
+	    .line{position:relative;padding:10px;color:#666;margin-bottom:20px;}
+		.form-wrap{width:300px;margin:30px auto;font-size:12px;}
+		.ipt{border:1px solid #333;border-radius:5px 0 0 5px;background:rgba(0,0,0,.3);padding:10px;color:#333;}
+		.sub-btn:after{content:'>';display:inline-block;margin-left:5px;-webkit-transition:0.3s ease;}
+		.ipt:focus::-webkit-input-placeholder{color:#fff;}
+		.sub-btn{border:1px solid #333;border-radius:0 5px 5px 0;color:#fff;padding:10px;background:#333;border-left:none;-webkit-transition:0.3s ease-in;}
+		.sub-btn:hover{background:rgba(0,0,0,.5);}
+		.sub-btn:hover:after{-webkit-transform:rotate(90deg) scale(1.5);}
+		@-webkit-keyframes glow{
+			0%{
+				border-color:#393;
+				box-shadow:0 0 5px rgba(0,255,0,.2),inset 0 0 5px rgba(0,255,0,.1);
+			}
+			100%{
+				border-color:rgba(0,255,0,.8);
+				box-shadow:0 0 20px rgba(0,255,0,.6),inset 0 0 20px rgba(0,255,0,.4);
+			}
+		}
+		.form-wrap .ipt:focus{-webkit-animation:glow 800ms ease infinite alternate;animation:glow 800ms ease infinite alternate;outline:none;box-shadow:0 0 5px rgba(0,255,0,.2),inset 0 0 5px rgba(0,255,0,.1),0 2px 0 #000;}
+		#flex-box{display:flex;list-style:none;width:300px;height:300px;padding:0;margin:0;background:#666;flex-flow:column;align-content:space-between;}
+		#flex-box li{background:#eee;text-align:center;width:50px;height:50px;margin:5px;}
+		.box{width:400px;display:-webkit-box;-webkit-line-clamp:3;overflow: hidden;-webkit-box-orient:vertical;}
+		#rotate{width:200px;height:200px;position: absolute;left:40%;top:20%;background:rgb(255,100,0);}
+		#subtn{width:5rem;height:2rem;text-align:center;background-color:rgba(0,255,0,.9);}
+	</style>
+</head>
+<body>
+	<div class="ceshi" style="width:100px;height:16px;text-overflow:clip;overflow:hidden;white-space:nowrap">大众点评网与美团网今天联合发布声明，宣布达成战略合作，双方已共同成立一家新公司。新公司将实施Co</div>
+	css3图标变色
+	<div class="icon">
+		<div class="icon icon-del"></div>
+	</div>
+	<div class="box">大众点评网与美团网今天联合发布声明，宣布达成战略合作，双方已共同成立一家新公司。新公司将实施Co-CEO制度，美团CEO王兴和大众点评CEO张涛将同时担任联席CEO和联席董事长，重大决策将在联席CEO和董事会层面完成。</div>
+	<form action="" class="form-wrap">
+		<div class="line">细线测试</div>
+		<div class="line2">细线测试2</div>
+		<input type="text" class="ipt" placeholder="输入关键字" size="20"><button type="submit"  class="sub-btn">Search</button>
+	</form>
+	<ul id="flex-box">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+		<li>4</li>
+	</ul>
+	<p id="demo"></p>
+	<p id="demo2"></p>
+	<div id="rotate"></div>
+	<input type="text" id="num"><input type="button" value="测试输入" onclick="message()">
+	<p id="ps" class="txt"></p>
+	<br>
+	<button id="subtn">提交按钮</button>
+	<script>
+		var myObject = {
+			firstName:"jim",
+			lastName:"gree",
+			fullName:function(){
+				return this.firstName + " " +this.lastName;
+			}
+		}
+		function myFunction(arg1,arg2){
+			this.firstName = arg1;
+			this.lastName = arg2;
+		}
+		function firstFuction(a,b){
+			return a * b;
+		}
+		var x = new myFunction("meimei","han")
+		var myarry = [10,2];
+		document.getElementById('demo').innerHTML = x.firstName;
+		// document.getElementById('demo2').innerHTML = firstFuction.apply(myObject,myarry);
+		document.getElementById('demo2').innerHTML = firstFuction.toString();
+		var deg = 0;
+		var block = document.getElementById('rotate');
+		block.addEventListener('click',function(){
+			var self = this;
+			requestAnimationFrame(function change(){
+				self.style.transform = 'rotate('+ (deg++) + 'deg)';
+				requestAnimationFrame(change);
+			})
+		})
+		var txt = "";
+		// 错误捕获
+		function message(){
+			try{
+				var val = document.getElementById('num').value;
+				if(val<1) throw "太小";
+				if(val>5) throw "太大";
+			}catch(err){
+				document.getElementsByClassName('txt')[0].innerHTML = err;
+			}
+		}
+	</script>
+</body>
+</html>

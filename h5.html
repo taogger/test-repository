@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+<style>
+  #drop1{border:1px solid #ccc;width:200px;height:200px;}
+</style>
+</head>
+<body>
+	<div id="drop1" ondrop="drop(event)" ondragover="alllowDrop(event)" width="336" height="60"></div>
+	<img src="images/p1.jpg" id="drag1" draggable="true" ondragstart="drag(event)" alt="" width="100" height="100">
+	<div id="sub_btn" onclick="clickCount(this)">确认</div>
+	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" height="190">
+	  <polygon points="100,10 40,180 190,60 10,60 160,180"
+	  style="fill:lime;stroke:purple;stroke-width:5;fill-rule:evenodd;">
+	</svg>
+	<script>
+		function alllowDrop(ev){
+			ev.preventDefault();
+		}
+		function drag(ev){
+			ev.dataTransfer.setData("text",ev.target.id);
+		}
+		function drop(ev){
+			ev.preventDefault();
+			var data = ev.dataTransfer.getData("text");
+			ev.target.appendChild(document.getElementById(data));
+		}
+		function clickCount(el){
+			if(typeof(Storage)!== "undefined"){
+				if(localStorage.clickcount){
+					localStorage.clickcount=Number(localStorage.clickcount)+1
+				}else{
+					localStorage.clickcount = 1;
+				}
+				console.log(localStorage.clickcount=Number(localStorage.clickcount)+1);
+			}else{
+				console.log("不支持");
+
+			}
+		}
+	</script>
+</body>
+</html>

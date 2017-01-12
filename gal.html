@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>galley</title>
+	<script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+	<script src="images/jquery.cookie.js"></script>
+	<link rel="stylesheet" id="link_href" href="images/skin_0.css">
+<style>
+	#scrol_pic{width:640px;background:#eee;padding:10px;}
+	.btn-bar{text-align:right;}
+   .btn-bar span{display: inline-block;border:1px solid #ddd;background:#fff;border-radius: 5px;padding:5px 10px;margin:0 5px;cursor:default;}
+   .btn-bar span:hover{background:#eee;}
+   #scrol_pic .scroll-inner{position: relative;overflow:hidden;width:640px;height:210px;}
+   #scrol_pic ul{position:absolute;width:100%;list-style:none;padding:0;margin:0;}
+   #scrol_pic li{float: left;width:200px;height:200px;line-height:200px;margin:5px;border:1px solid #ddd;background:#fff;}
+   #scrol_pic li img{max-width:200px;vertical-align:middle;}
+   .btn-bar i{display:inline-block;width:10px;height:10px;background:#fff;border-radius:50%;margin:0 2px;}
+   .btn-bar .cur{background:red;}
+   #changeSkin li{width:10px;height:10px;display: inline-block;margin-right:3px;background:#fff;}
+   #skin_1.cur{background:red;}
+   #skin_2.cur{background:blue;}
+   #skin_3.cur{background:green;}
+   .arr{border:10px solid red;font-size:0;border-color:red transparent transparent transparent;}
+</style>
+</head>
+<body>
+	<ul id="changeSkin">
+		<li id="skin_1"></li>
+		<li id="skin_2"></li>
+		<li id="skin_3"></li>
+	</ul>
+	<div id="scrol_pic">
+		<div class="btn-bar"><i class="cur"></i><i></i><span class="prev">&lt;</span><span class="next">&gt;</span></div>
+		<div class="scroll-inner">
+			<ul>
+				<li><img src="images/p1.jpg" alt=""></li>
+				<li><img src="images/p2.jpg" alt=""></li>
+				<li><img src="images/p3.jpg" alt=""></li>
+				<li><img src="images/p4.jpg" alt=""></li>
+				<li><img src="images/p5.jpg" alt=""></li>
+				<li><img src="images/p6.jpg" alt=""></li>
+			</ul>
+		</div>
+	</div>
+	<progress value="20" max="100"></progress>
+	<button id="pro_gresss">进度条</button>
+	<span class="arr"></span>
+	<script>
+		$(function(){
+			var page = 1;
+			var i = 3;
+			var listCont = $('#scrol_pic ul');
+			var list = $('#scrol_pic li');
+			var picLength = list.length;
+			var picWidth = list.outerWidth(true);
+			var ulWidth = picLength * picWidth;
+			var vWidth = $('.scroll-inner').width();
+			var pageCount = Math.ceil(picLength/i);
+			var dot = $('.btn-bar i');
+			$('#scrol_pic ul').width(ulWidth);
+			$('.btn-bar span').click(function(){
+				if($(this).hasClass('next')){
+					if(!listCont.is(':animated')){
+						if(page == pageCount){	
+							listCont.animate({left:'0px'},'slow');
+							page = 1;
+						}else{
+							listCont.animate({left:'-='+ vWidth},'slow');
+							page++;
+						}
+						dot.eq(page-1).addClass('cur').siblings().removeClass('cur');
+					}
+				}else{
+					if(!listCont.is(':animated')){
+						if(page == 1){
+							listCont.animate({left:'-='+vWidth*(pageCount-1)},'slow');
+							page = pageCount;
+						}else{
+							listCont.animate({left:'+='+vWidth},'slow');
+							page--;
+						}
+						dot.eq(page-1).addClass('cur').siblings().removeClass('cur');
+					}
+				}
+			})
+
+			dot.click(function(){
+				if(!listCont.is(':animated')){
+					if(page == pageCount){
+						listCont.animate({left:'0px'},'slow');
+						page = 1;
+					}else{
+						listCont.animate({left:'-='+ vWidth},'slow');
+						page++;
+					}
+					dot.eq(page-1).addClass('cur').siblings().removeClass('cur');
+				}
+			})
+			//换肤
+			$('#changeSkin li').click(function(){
+				$('#'+this.id).addClass('cur').siblings().removeClass('cur');
+				$('#link_href').attr('href','images/'+(this.id)+ '.css');
+				$.cookie('myskin',this.id,{path:'/',expires:10});
+			})
+			var cookie_skin = $.cookie('myskin');
+			if(cookie_skin){
+				$('#'+cookie_skin).addClass('cur').siblings().removeClass('cur');
+				$('#link_href').attr('href','images/'+ cookie_skin + '.css');
+				$.cookie('myskin',cookie_skin,{path:'/',expires:10});
+			}
+
+			$('#pro_gresss').one('click',function(){
+				$('progress').animate({value:"+=80"},400)
+			})
+
+		})
+	</script>
+</body>
+</html>
