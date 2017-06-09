@@ -45,10 +45,89 @@
             <div class="col-lg-2">345</div>
         </div>
     </div>
-
+   <div class="head_img pr">  
+        <em class="pa"></em>  
+        <div style="width:200px;height:200px;border:1px solid #ddd;"><img src='../images/icon_touxiang.png' alt="" class="modify_img" />  </div>
+        <input id="photo" type="file" accept="image/*" />  
+    </div> 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="http://cdn.bootcss.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script>
+       function myConcat(separator){
+          var args = Array.prototype.slice.call(arguments,1);
+          return args.join(separator);
+       }
+       var test = myConcat("fff","eee",',','ggg','333');
+       var sum = 0;
+       var num = [1,2,3,6];
+       var user = [{name:"test1"},{name:"must"},{name:"kuai"},{name:"thdis"}];
+       num.forEach(function(item,index,arr){
+         sum += item;
+       })
+       var names = user.map(function(u){
+         return u.name;
+       }).filter(function(n){
+         return /^t/.test(n);
+       })
+       console.log(names.join(','));
+       console.log(test);
+       console.log(sum);
+       var eles = document.querySelectorAll('div');
+       Array.prototype.forEach.call(eles,function(n){
+          console.log("该div的类名是：" + n.className || "空");
+       })
+
+
+      $(function(){
+       // upload
+            $('#photo').change(function(){  
+                  var _this = $(this)[0],  
+                      _file = _this.files[0],  
+                      fileType = _file.type;  
+                      console.log(_file.size);  
+                  if(/image\/\w+/.test(fileType)){  
+                      console.log('图片上传中...');
+                      var fileReader = new FileReader();  
+                      fileReader.readAsDataURL(_file);  
+                      fileReader.onload = function(event){  
+                          var result = event.target.result;   //返回的dataURL  
+                          var image = new Image();  
+                          image.src = result;  
+                          image.onload = function(){  //创建一个image对象，给canvas绘制使用  
+                              var cvs = document.createElement('canvas');  
+                              var scale = 1;    
+                              if(this.width > 900 || this.height > 900){  
+                                  if(this.width > this.height){    
+                                      scale = 900 / this.width;  
+                                  }else{    
+                                      scale = 900 / this.height;    
+                                  }    
+                              }  
+                              cvs.width = this.width*scale;    
+                              cvs.height = this.height*scale;     //计算等比缩小后图片宽高  
+                              var ctx = cvs.getContext('2d');    
+                              ctx.drawImage(this, 0, 0, cvs.width, cvs.height);     
+                              var newImageData = cvs.toDataURL(fileType, 0.8);   //重新生成图片
+                              // var sendData = newImageData.replace("data:"+fileType+";base64,",''); 
+                              $('.modify_img').attr('src',newImageData);   
+                              // $.post('/user/personalchange',{type:'photo',value:sendData},function(data){  
+                              //     if(data.code == '200'){  
+                              //         $('.modify_img').attr('src',newImageData);  
+                              //         $.notify.close();  
+                              //     }else{  
+                              //         $.notify.show(data.message, {placement: 'center'});  
+                              //     }  
+                              // });  
+                          }  
+                            
+                      }  
+                  }else{  
+                      alert('请选择图片格式文件')
+                  }  
+              });  
+        })
+    </script>
   </body>
 </html>

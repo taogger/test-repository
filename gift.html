@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" charset="UTF-8" />
+<meta name="author" content="rookie" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>注册有礼</title>
+<link rel="stylesheet" href="view/css/main.css">
+<link rel="stylesheet" href="reg_gift.css">
+<style type="text/css">
+	.tips{color:#666;font-size:1.2rem;width:20rem;text-align:center;position:absolute;left:50%;top:50%;z-index:1001;border-radius:0.25rem;background-color:#fff;-webkit-transform:translate3d(-50%,-50%,0);transform:translate3d(-50%,-50%,0);opacity:0;}
+	.tips span{padding:2rem;display:block;}
+	.layer-bg{position:fixed;top:0;width:100%;height:100%;background-color:rgba(0,0,0,.6);z-index:1000;opacity:0;}
+	.shows{animation-name:scalePop; -webkit-animation-name:scalePop; -webkit-animation-fill-mode: both; animation-fill-mode: both; -webkit-animation-duration: .18s; animation-duration: .18s;}
+	@-webkit-keyframes scalePop{
+		0%{
+			opacity:0;-webkit-transform:transcale3d(0.1,0.1,0.1);transform:transcale3d(0.1,0.1,0.1);
+		}
+		100%{
+			opacity:1;-webkit-transform:transcale3d(1,1,1);transform:transcale3d(1,1,1);
+		}
+	}
+
+</style>
+<script src="http://cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body class="reg-wrap">
+	<div class="reg-gift">
+	  <div class="banner"><img src="#" alt=""></div>
+	  <dl>
+	  	<dt>asdasdasd</dt>
+	  	<dd class="rule-des">
+	  		1、活动效期：2017.3.1~2017.4.29；
+2、凡是在此期间新注册的会员均有好礼相送；
+3、20元无门槛优惠券一张+100积分；
+	  	</dd>
+	  </dl>
+	  <div class="btn-cont"><a href="#" class="btn btn-orange">立即注册</a></div>
+	  
+	</div>
+	<dd class="save-addr">
+      <input type="text" class="addr-iput" placeholder="http://" value=""><input type="button" value="保存" id="save_addr" class="bt btn-blue">
+      <p class="test"><strong class="link-url">http://abc.oms/taoex.com</strong> <span class="modif">点击修改</span></p>
+    </dd>
+	<script>
+	    window.onload = function(){
+	    	var changeText = function(){
+	    		var rule_des = document.querySelector('.rule-des'),
+			        rule_text = rule_des.innerHTML,
+			        change_text = rule_text.replace(/\n/g,'<br/>');
+	     		rule_des.innerHTML = change_text;
+	    	}
+	    	changeText();
+	    }
+	    // $(function(){
+	    // 	var pop_tips = function(mes){
+	    // 		var tip = $("<p class='tips'>"+mes+"</p>"),
+	    // 		    layer_bg = $('<div class="layer-bg"></div>'),
+	    // 		    reg_wrap = $('.reg-gift'),
+	    // 		    add_sel = tip.add(layer_bg);
+	    // 		add_sel.appendTo(reg_wrap);
+	    // 		add_sel.fadeIn(300);
+	    // 		setTimeout(function(){
+	    // 			add_sel.fadeOut(500,function(){
+	    // 				add_sel.remove();
+	    // 				window.location.href="<{link ctl='default' act='index'}>";
+	    // 			});
+	    // 		},3000)
+	    // 	}
+	    // 	$('.btn-cont a').click(function(){
+	    // 		pop_tips('您已是会员，将为您跳转商城首页');
+	    // 	})
+	    // })
+		var pop_tips = function(mes){
+			    var bd = document.querySelector('body');
+	    		var tip = document.createElement('p');
+	    		var sp = document.createElement('span');
+	    		    sp.innerText = mes;
+	    		    tip.className = 'tips';
+	    		    tip.appendChild(sp);
+	    		    bd.appendChild(tip);
+	    		var layerBg = document.createElement('div');
+	    		    layerBg.className = 'layer-bg';
+	    		    bd.appendChild(layerBg);
+	    		    tip.className = "tips shows";
+	    		    layerBg.className = 'layer-bg shows';
+	    		setTimeout(function(){
+	    			bd.removeChild(tip);
+	    			bd.removeChild(layerBg);
+
+	    		},3000)
+	    }
+	    document.querySelector('.btn-cont a').addEventListener('click',function(){
+	    	pop_tips('测试一下测试一下测试一下测试一下');
+	    });
+
+	    var saveUrl = function(){
+	        var saveBtn = document.querySelector('#save_addr'),
+	            addrIput = document.querySelector('.addr-iput'),
+	            addrUrl = document.querySelectorAll('.save-addr .link-url')[0];
+	        saveBtn.addEventListener('click',function(){
+	          if(! addrIput.value == ""){
+	            addrUrl.innerHTML = addrIput.value;
+	          }
+	        });
+	        document.querySelector('.modif').addEventListener('click',function(){
+	          addrIput.value = addrUrl.innerHTML;
+	        });
+	   }
+  	 saveUrl();
+	</script>
+</body>
+</html>

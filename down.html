@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" charset="UTF-8" />
+<meta name="author" content="rookie" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>商品店小二APP下载</title>
+<link rel="stylesheet" href="/view/css/main.css">
+<style>
+    html,body{height:100%;}
+    body{background:url(images/down-pic.png) no-repeat #EFEFF4 center bottom;background-size:85%;}
+    .dowload-wrap{font-size:1rem;text-align:center;}
+    .dowload-wrap section{padding:2rem;margin-bottom:2rem;}
+    .dowload-wrap section p{text-align:left;padding-left:2rem;color:#666;}
+	.tips{position:fixed;height:100%;width:100%;color:#fff;text-align:center;top:0;left:0;line-height:16rem;background:url(images/curve.png) no-repeat rgba(0,0,0,.6) right top;background-size:30%;}
+	.down-btn{display:inline-block;background-color:#19a4f2;color:#fff;border-radius:0.3rem;padding:0.5rem 1rem;text-decoration:none;}
+</style>
+</head>
+<body >
+	<div class="dowload-wrap">
+		<h1><img src="/view/images/dxrlogo@2x.png" alt=""></h1>
+		<section>
+			<h4>商派店小二 —— 门店新零售管理工具</h4>
+			<p>
+				24h在线接待、线上内容无限分享<br>
+				会员经营利器、线上线下业务纽带<br>
+				店小二，让你的门店离消费者更近一步！
+			</p>
+		</section>
+		<a href="#" class="down-btn">下载APP</a>
+	</div>
+	<script>
+    	function isWeiXin() {
+	      var ua = window.navigator.userAgent.toLowerCase();
+	      if (ua.match(/MicroMessenger/i) == 'micromessenger') {
+	        return true;
+	      } else {
+	        return false;
+	      }
+	    }
+	    var bdy = document.querySelector('body'),
+	        btnHref = document.querySelector('.down-btn');
+	    if(isWeiXin()){
+	      	bdy.className = "weixin";
+	      	btnHref.setAttribute('href','');
+	    }else{
+	    	btnHref.setAttribute('href','http://update.shopex.com.cn/apk/penkr.apk');
+	    }
+	    if(document.querySelector('.weixin')){
+		    var downBtn = document.querySelector('.weixin .down-btn');
+		    downBtn.addEventListener('click',function(){
+		    	var tipLayer = document.createElement('div');
+		    	var tipText = document.createTextNode('请在浏览器中打开页面进行APP下载');
+		    	    tipLayer.appendChild(tipText);
+		    	    tipLayer.className = "tips";
+		    	bdy.appendChild(tipLayer);
+		    	return false;
+		    })
+	    }
+	</script>
+</body>
+</html>

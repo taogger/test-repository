@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" charset="UTF-8" />
+<meta name="author" content="rookie" />
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<title>商品店小二APP下载</title>
+<style>
+    html,body{height:100%;}
+    .verlist-log h4{line-height:3rem;background-color:#eee;padding:0 1rem;}
+    .verlist-log section{overflow:hidden;margin-bottom:1rem;}
+    .verlist-log .ver-inf li{float: left;width:49.9%;line-height:2rem;}
+</style>
+</head>
+<body >
+	<div class="verlist-wrap">
+	    <div class="verlist-log">
+	    	<section>
+	    		<h4>券码名称:</h4>
+	    		<ul class="ver-inf">
+		    		<li>优惠券号:</li>
+		    		<li>面值:</li>
+		    		<li>核销时间:</li>
+		    		<li>已核销次数:</li>
+	    		</ul>
+	    	</section>
+	    </div>
+	    <button class="getBtn">获取</button>
+  </div>
+  <script src="http://cdn.bootcss.com/jquery/1.12.1/jquery.min.js"></script>
+  <script>
+    (function(){
+       var urls = 'http://wei.shopex123.com/index.php?ctl=app/guide&act=verification_log&guide_identity=128827102930944' ;
+       $('.getBtn').click(function(){
+       	  	$.ajax({
+       	  		url:urls,
+       	  		dataType:'JSON',
+       	  		type:'post',
+       	  		success:function(res){
+       	  			var data = JSON.parse(res);
+       	  			console.log(data);
+       	  		}
+       	  	})
+       })
+       // if(log_str == "暂无物流动态!"){
+       //     document.querySelector('.logistics-list').innerHTML = "暂无物流动态!";
+       //  }else{
+       //     var data = log_str.result.length;
+       //     console.log(data);
+       //     for(var i=0;i<len;i++){
+       //         list += "<dl><dt>"+ log_str[i].AcceptTime +"</dt><dd>"+ log_str[i].AcceptStation +"</dd></dl>"
+       //     }
+       //     document.querySelector('.logistics-wrap').innerHTML = list;
+       //  }
+
+    })()
+  </script>
+</body>
+</html>
